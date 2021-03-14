@@ -48,8 +48,11 @@ const Details = () => {
         <ClearValue onClick={clearUsername}>limpar username</ClearValue>
       </div>}
 
-
       <Button onClick={goBackToHome} >Voltar</Button>
+
+      <p style={{ fontSize: '1.5rem', marginTop: '1rem' }}>
+        O state foi compartilhado via contexto entre rotas
+      </p>
     </div>
   )
 }
