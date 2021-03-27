@@ -1,6 +1,7 @@
 import React, { useContext } from 'react'
-import { useHistory } from 'react-router'
+import { useHistory, Redirect } from 'react-router'
 import styled from 'styled-components'
+import { AuthContext } from '../contexts/AuthContext'
 import { UserContext } from '../contexts/UserContext'
 
 const Button = styled.button`
@@ -35,10 +36,19 @@ const ClearValue = styled.span`
 const Details = () => {
 
   const { username, clearUsername } = useContext(UserContext)
+  const { auth: authorization, setAuth } = useContext(AuthContext)
+
+  console.log('auth details', authorization)
 
   const history = useHistory()
 
-  const goBackToHome = () => history.push('/')
+  const goBackToHome = () => {
+    history.push('/')
+    setAuth(false)
+
+  }
+
+  if (!authorization) return <Redirect to="/" />
 
   return (
     <div style={{ maxWidth: '35rem' }}>

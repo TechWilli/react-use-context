@@ -1,6 +1,7 @@
 import React, { useRef, useEffect, useContext } from 'react'
 import { useHistory } from 'react-router'
 import styled from 'styled-components'
+import { AuthContext } from '../contexts/AuthContext'
 import { UserContext } from '../contexts/UserContext'
 
 const Input = styled.input`
@@ -48,17 +49,23 @@ const Home = () => {
 
   const inputRef = useRef(null)
   const { username, setUsername } = useContext(UserContext)
+  const { auth, setAuth } = useContext(AuthContext)
 
   const handleUsernameChange = ({ target }) => setUsername(target.value)
 
   const history = useHistory()
 
-  const goToDetails = () => history.push('/details')
+  const goToDetails = () => {
+    history.push('/details')
+    setAuth(true)
+
+  }
 
   useEffect(() => {
-
     inputRef.current.focus()
-  }, [])
+    console.log('auth home', auth)
+
+  }, [auth])
 
   return (
     <div>
